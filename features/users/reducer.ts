@@ -1,4 +1,5 @@
 import { ActionType } from 'typesafe-actions'
+import { HYDRATE } from 'next-redux-wrapper'
 
 import * as actions from './actions'
 
@@ -19,6 +20,12 @@ export const usersReducer = (
   action: ActionType<typeof actions>
 ): UsersState => {
   switch (action.type) {
+    case HYDRATE as any:
+      return {
+        ...state,
+        ...(action.payload as any).users,
+      }
+
     case 'ADD_USER':
       return {
         ...state,

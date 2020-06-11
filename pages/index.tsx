@@ -1,16 +1,21 @@
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import _ from 'lodash'
+import _, { add } from 'lodash'
 
 import { RootState } from 'features/types'
 import { selectUserList } from 'features/users/selectors'
+import { addUser } from 'features/users/actions'
 import { User } from 'features/users/reducer'
+import { withPage } from 'common/hoc'
 
 interface Props {
   users: User[]
 }
 
 const enhance = compose<Props, Props>(
+  withPage(async (c) =>
+    c.store.dispatch(addUser({ id: '1', name: 'Al', surname: 'Pacino' }))
+  ),
   connect<Props>((state: RootState) => ({
     users: selectUserList(state),
   }))
@@ -28,12 +33,6 @@ function Home({ users }: Props) {
       </ul>
     </div>
   )
-}
-
-export const getInitialProps = ({ store }) => {
-  console.log('Homecomp', store)
-
-  return {}
 }
 
 export default enhance(Home)
