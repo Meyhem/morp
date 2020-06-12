@@ -19,7 +19,7 @@ export const theme = {
     mega: '5rem',
   },
   breakpoints: {
-    xs: 320,
+    xs: 1,
     sm: 576,
     md: 768,
     lg: 992,

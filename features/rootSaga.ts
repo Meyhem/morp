@@ -1,10 +1,11 @@
-import { all } from 'redux-saga/effects'
+import { all, race } from 'redux-saga/effects'
 
-// import feature sagas
+import { serverUserRootSaga, userRootSaga } from './users/saga'
 
 export function* rootSaga() {
-  yield all([
-    // register feature sagas by direct call, e.g.:
-    // myFeatureRootSaga()
-  ])
+  yield all([userRootSaga()])
+}
+
+export function* serverRootSaga() {
+  yield race([serverUserRootSaga()])
 }

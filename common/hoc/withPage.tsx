@@ -1,5 +1,4 @@
 import React from 'react'
-import { Store } from 'redux'
 import { NextComponentType, NextPageContext } from 'next'
 
 export interface WithPageProps {}

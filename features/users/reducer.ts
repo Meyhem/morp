@@ -30,6 +30,7 @@ export const usersReducer = (
       return {
         ...state,
         users: {
+          ...state.users,
           [action.payload.id]: { ...action.payload },
         },
       }

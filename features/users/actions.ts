@@ -5,3 +5,5 @@ export const addUser = createAction('ADD_USER')<{
   name: string
   surname: string
 }>()
+
+export const fetchUsers = createAction('FETCH_USERS')()
