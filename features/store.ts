@@ -1,9 +1,10 @@
 import { createStore, compose, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 import { createWrapper } from 'next-redux-wrapper'
+import _ from 'lodash'
 
 import { makeRootReducer } from './rootReducer'
-import { rootSaga, serverRootSaga } from './rootSaga'
+import { rootSaga } from './rootSaga'
 import { RootState } from './types'
 
 const sagaMw = createSagaMiddleware()
@@ -28,10 +29,12 @@ const makeStore = ({ ctx }: any) => {
   )
   const extendable = store as any
 
+  extendable.saga = sagaMw.run(rootSaga)
+  // TODO: client side
   if (ctx) {
-    extendable.sagaTask = sagaMw.run(serverRootSaga)
+    extendable.end = () => store.dispatch(END)
   } else {
-    extendable.sagaTask = sagaMw.run(rootSaga)
+    extendable.end = _.noop
   }
 
   return store

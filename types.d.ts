@@ -9,8 +9,9 @@ declare module 'styled-components' {
 
 declare module 'redux' {
   export interface Store<S = any, A extends Action = AnyAction> {
-    sagaTask: {
+    saga: {
       toPromise(): Promise
     }
+    end(): void
   }
 }

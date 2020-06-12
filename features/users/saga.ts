@@ -2,7 +2,6 @@ import { put, delay, race, all, takeEvery } from 'redux-saga/effects'
 import { getType } from 'typesafe-actions'
 
 import { addUser, fetchUsers } from './actions'
-import { takeSingle } from 'common/saga'
 
 export function* getUsers() {
   yield delay(100)
@@ -15,6 +14,6 @@ export function* userRootSaga() {
   yield all([takeEvery(getType(fetchUsers), getUsers)])
 }
 
-export function* serverUserRootSaga() {
-  yield race([takeSingle(getType(fetchUsers), getUsers)])
-}
+// export function* serverUserRootSaga() {
+//   yield race([takeSingle(getType(fetchUsers), getUsers)])
+// }

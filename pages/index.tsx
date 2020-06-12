@@ -1,43 +1,19 @@
 import { compose } from 'recompose'
-import { connect } from 'react-redux'
+import Link from 'next/link'
 import _ from 'lodash'
-import styled from 'styled-components'
 
-import { RootState } from 'features/types'
-import { selectUserList } from 'features/users/selectors'
-import { User } from 'features/users/reducer'
-import { fetchUsers } from 'features/users/actions'
-import { withPage } from 'common/hoc'
+interface Props {}
 
-const UserList = styled.ul`
-  font-size: 1.5em;
-  font-weight: bold;
-`
+const enhance = compose<Props, Props>()
 
-interface Props {
-  users: User[]
-}
-
-const enhance = compose<Props, Props>(
-  withPage(async ({ store }) => {
-    store.dispatch(fetchUsers())
-    await store.sagaTask.toPromise()
-  }),
-  connect<Props>((state: RootState) => ({
-    users: selectUserList(state),
-  }))
-)
-
-function Home({ users }: Props) {
+function Home({}: Props) {
   return (
     <div>
-      <UserList>
-        {_.map(users, (u) => (
-          <li key={u.id}>
-            {u.name} {u.surname}
-          </li>
-        ))}
-      </UserList>
+      <Link href="/users">
+        <a>Users</a>
+      </Link>
+
+      <h1>Home page bruv</h1>
     </div>
   )
 }
