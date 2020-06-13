@@ -37,5 +37,4 @@ export const usersReducer = (
     default:
       return state
   }
-  return initialState
 }
