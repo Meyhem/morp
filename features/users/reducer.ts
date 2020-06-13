@@ -23,7 +23,7 @@ export const usersReducer = (
     case HYDRATE as any:
       return {
         ...state,
-        ...(action.payload as any).users,
+        ...(action as any).payload.users,
       }
 
     case 'ADD_USER':
