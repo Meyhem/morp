@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import _ from 'lodash'
 
-import { styled } from 'common/theme'
+import { styled } from 'ui/theme'
 import { RootState } from 'features/types'
 import { selectUserList } from 'features/users/selectors'
 import { User } from 'features/users/reducer'
