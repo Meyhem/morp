@@ -1,9 +1,15 @@
-import { RootState } from '../types'
-import {} from './selectors'
+import { selectUserList } from './selectors'
 
 describe('exampleSelectors', () => {
-  const state = {} as RootState
+  const state = {
+    users: {
+      users: { '1': { id: '1', name: '123', surname: '432' } },
+    },
+  }
+
   test('exampleSelectors - selectSomething', () => {
-    expect(selectSomething(state)).toEqual('hello')
+    expect(selectUserList(state)).toEqual([
+      { id: '1', name: '123', surname: '432' },
+    ])
   })
 })

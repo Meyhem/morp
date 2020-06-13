@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import baseStyled, { ThemedStyledInterface } from 'styled-components'
+
 export const theme = {
   colors: {
     primary: '#007bff',
@@ -27,6 +29,8 @@ export const theme = {
   },
 }
 
+type CustomTheme = typeof theme
+
 export type Breakpoint = keyof typeof theme.breakpoints
 
 export function brk(min: Breakpoint) {
@@ -44,3 +48,5 @@ export function brkbt(min: Breakpoint | null, max: Breakpoint) {
 }
 
 export const GlobalStyle = createGlobalStyle``
+
+export const styled = baseStyled as ThemedStyledInterface<CustomTheme>
