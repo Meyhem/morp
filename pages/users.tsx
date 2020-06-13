@@ -21,13 +21,9 @@ interface Props {
 
 const enhance = compose<Props, Props>(
   withPage(async ({ store }) => {
-    console.log('GIP Start')
-
     store.dispatch(fetchUsers())
-    store.end()
-    await store.saga.toPromise()
 
-    console.log('GIP End')
+    await store.end()
   }),
   connect<Props>((state: RootState) => ({
     users: selectUserList(state),

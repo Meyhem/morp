@@ -16,7 +16,7 @@ interface UsersState {
 const initialState: UsersState = { users: {} }
 
 export const usersReducer = (
-  state: UsersState,
+  state: UsersState = initialState,
   action: ActionType<typeof actions>
 ): UsersState => {
   switch (action.type) {
@@ -34,6 +34,8 @@ export const usersReducer = (
           [action.payload.id]: { ...action.payload },
         },
       }
+    default:
+      return state
   }
   return initialState
 }

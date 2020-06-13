@@ -12,6 +12,6 @@ declare module 'redux' {
     saga: {
       toPromise(): Promise
     }
-    end(): void
+    end(): Promise
   }
 }

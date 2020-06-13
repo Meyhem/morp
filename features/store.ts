@@ -7,22 +7,22 @@ import { makeRootReducer } from './rootReducer'
 import { rootSaga } from './rootSaga'
 import { RootState } from './types'
 
-const sagaMw = createSagaMiddleware()
-const rootReducer = makeRootReducer()
-const composeEnhancers =
-  typeof window !== 'undefined'
-    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : compose
-
-const log = (store) => (next) => (action) => {
-  console.log('DISPATCHED', action.type)
-  let result = next(action)
-  return result
-}
-
-const middleware = [log, sagaMw]
-
 const makeStore = ({ ctx }: any) => {
+  const rootReducer = makeRootReducer()
+  const composeEnhancers =
+    typeof window !== 'undefined'
+      ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : compose
+
+  const log = (store) => (next) => (action) => {
+    console.log('DISPATCHED', action.type)
+    let result = next(action)
+    return result
+  }
+
+  const sagaMw = createSagaMiddleware()
+
+  const middleware = [log, sagaMw]
   const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(...middleware))
@@ -30,11 +30,14 @@ const makeStore = ({ ctx }: any) => {
   const extendable = store as any
 
   extendable.saga = sagaMw.run(rootSaga)
-  // TODO: client side
+
   if (ctx) {
-    extendable.end = () => store.dispatch(END)
+    extendable.end = async () => {
+      store.dispatch(END)
+      await extendable.saga.toPromise()
+    }
   } else {
-    extendable.end = _.noop
+    extendable.end = () => Promise.resolve()
   }
 
   return store
