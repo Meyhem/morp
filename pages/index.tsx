@@ -2,18 +2,20 @@ import { compose } from 'recompose'
 import Link from 'next/link'
 import _ from 'lodash'
 
-interface Props {}
+import { withTranslation, WithTranslation } from 'common/hoc'
 
-const enhance = compose<Props, Props>()
+interface Props extends WithTranslation {}
 
-function Home({}: Props) {
+const enhance = compose<Props, Props>(withTranslation())
+
+function Home({ t }: Props) {
   return (
     <div>
       <Link href="/users">
         <a>Users</a>
       </Link>
 
-      <h1>Home page bruv</h1>
+      <h1>Home page bruv - ({t('test')})</h1>
     </div>
   )
 }

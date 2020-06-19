@@ -3,10 +3,15 @@ import { compose } from 'recompose'
 import { ThemeProvider } from 'styled-components'
 import withReduxSaga from 'next-redux-saga'
 
+import NextI18Next from '../i18n'
 import { theme, GlobalStyle } from 'ui/theme'
 import { storeWrapper } from 'features/store'
 
-const enhance = compose(storeWrapper.withRedux, withReduxSaga)
+const enhance = compose(
+  storeWrapper.withRedux,
+  withReduxSaga,
+  NextI18Next.appWithTranslation
+)
 
 class AppCompoment extends App {
   static async getInitialProps({ Component, ctx }: AppContext) {
@@ -14,7 +19,7 @@ class AppCompoment extends App {
       ? await Component.getInitialProps(ctx)
       : {}
 
-    return { pageProps: p }
+    return { pageProps: p, namespacesRequired: ['common'] }
   }
 
   render() {
