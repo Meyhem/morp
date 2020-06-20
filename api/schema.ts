@@ -4,6 +4,13 @@ export const rootSchema = gql`
   type Query {
     user(id: ID!): User
     users: [User]
+
+    roles: [Role]
+  }
+
+  type Mutation {
+    addRole(name: String!): Role
+    removeRole(name: String!): Boolean
   }
 
   type User {
