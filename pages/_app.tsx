@@ -3,7 +3,7 @@ import { compose } from 'recompose'
 import { ThemeProvider } from 'styled-components'
 import withReduxSaga from 'next-redux-saga'
 
-import NextI18Next from '../i18n'
+import NextI18Next from '../common/i18n'
 import { theme, GlobalStyle } from 'ui/theme'
 import { storeWrapper } from 'features/store'
 

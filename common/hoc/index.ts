@@ -1,4 +1,6 @@
 export type { WithTranslation } from 'next-i18next'
-export { withTranslation } from '../../i18n'
+import i18n from '../i18n'
+
+export const withTranslation = i18n.withTranslation
 
 export * from './withPage'
