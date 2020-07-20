@@ -15,7 +15,7 @@ function Home({ t }: Props) {
         <a>Users</a>
       </Link>
 
-      <h1>Home page bruv - ({t('test')})</h1>
+      <h1>Home page - ({t('test')})</h1>
     </div>
   )
 }

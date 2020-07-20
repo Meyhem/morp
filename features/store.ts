@@ -14,30 +14,24 @@ const makeStore = ({ ctx }: any) => {
       ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : compose
 
-  const log = (store) => (next) => (action) => {
-    console.log('DISPATCHED', action.type)
-    let result = next(action)
-    return result
-  }
-
   const sagaMw = createSagaMiddleware()
 
-  const middleware = [log, sagaMw]
+  const middleware = [sagaMw]
   const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(...middleware))
   )
-  const extendable = store as any
+  const extendableStore = store as any
 
-  extendable.saga = sagaMw.run(rootSaga)
+  extendableStore.saga = sagaMw.run(rootSaga)
 
   if (ctx) {
-    extendable.end = async () => {
+    extendableStore.end = async () => {
       store.dispatch(END)
-      await extendable.saga.toPromise()
+      await extendableStore.saga.toPromise()
     }
   } else {
-    extendable.end = () => Promise.resolve()
+    extendableStore.end = () => Promise.resolve()
   }
 
   return store
