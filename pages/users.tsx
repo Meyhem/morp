@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import _ from 'lodash'
 
-import { styled } from 'ui/theme'
+import { withPage } from 'common/hoc'
+
 import { RootState } from 'features/types'
 import { selectUserList } from 'features/users/selectors'
 import { User } from 'features/users/reducer'
 import { fetchUsers } from 'features/users/actions'
-import { withPage } from 'common/hoc'
+
+import { styled } from 'ui/theme'
 
 const UserList = styled.ul`
   font-size: 1.5em;

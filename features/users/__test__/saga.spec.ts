@@ -1,6 +1,6 @@
 import { delay, put } from 'redux-saga/effects'
-import { getUsers } from './saga'
-import { addUser } from './actions'
+import { getUsers } from '../saga'
+import { addUser } from '../actions'
 
 describe('getUsers()', () => {
   it('runs', () => {

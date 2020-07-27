@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node --inspect server.js",
     "build": "next build",
     "test": "jest"
   },

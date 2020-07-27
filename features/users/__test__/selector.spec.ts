@@ -1,4 +1,4 @@
-import { selectUserList } from './selectors'
+import { selectUserList } from '../selectors'
 
 describe('exampleSelectors', () => {
   const state = {

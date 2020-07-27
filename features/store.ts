@@ -9,12 +9,9 @@ import { RootState } from './types'
 
 const makeStore = ({ ctx }: any) => {
   const rootReducer = makeRootReducer()
-  const composeEnhancers =
-    typeof window !== 'undefined'
-      ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      : compose
-
   const sagaMw = createSagaMiddleware()
+
+  const composeEnhancers = typeof window !== 'undefined' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   const middleware = [sagaMw]
   const store = createStore(
@@ -37,4 +34,4 @@ const makeStore = ({ ctx }: any) => {
   return store
 }
 
-export const storeWrapper = createWrapper<RootState>(makeStore, { debug: true })
+export const storeWrapper = createWrapper<RootState>(makeStore, { debug: false })

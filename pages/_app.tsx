@@ -19,7 +19,7 @@ class AppCompoment extends App {
       ? await Component.getInitialProps(ctx)
       : {}
 
-    return { pageProps: p, namespacesRequired: ['common'] }
+    return { pageProps: p }
   }
 
   render() {

@@ -16,7 +16,7 @@ export const withPage = (f?: (c: NextPageContext) => Promise<any>) => (
         await f(ctx)
       }
 
-      return p
+      return { ...p, namespacesRequired: ['common'] }
     }
 
     render() {
