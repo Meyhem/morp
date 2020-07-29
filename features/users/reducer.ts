@@ -1,6 +1,7 @@
 import { ActionType } from 'typesafe-actions'
 import { HYDRATE } from 'next-redux-wrapper'
 
+import { withLoading } from 'features/loading'
 import * as actions from './actions'
 
 export interface User {
@@ -15,7 +16,7 @@ interface UsersState {
 
 const initialState: UsersState = { users: {} }
 
-export const usersReducer = (
+const baseUsersReducer = (
   state: UsersState = initialState,
   action: ActionType<typeof actions>
 ): UsersState => {
@@ -38,3 +39,5 @@ export const usersReducer = (
       return state
   }
 }
+
+export const usersReducer = withLoading(baseUsersReducer, 'users', initialState)
