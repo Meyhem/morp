@@ -6,30 +6,31 @@ import _ from 'lodash'
 import { withPage } from 'common/hoc'
 
 import { RootState } from 'features/types'
-import { selectUserList } from 'features/users/selectors'
-import { User } from 'features/users/reducer'
-import { fetchUsers } from 'features/users/actions'
+import { usersActions, usersSelectors } from 'features/users'
 
 import { styled } from 'ui/theme'
+import { Dispatch } from 'redux'
 
 const UserList = styled.ul`
   font-size: 1.5em;
   font-weight: bold;
 `
 
-interface Props {
-  users: User[]
-}
+const mapState = (state: RootState) => ({
+  users: usersSelectors.selectUserList(state),
+})
+
+const mapDispatch = (d: Dispatch) => ({})
+
+type Props = ReturnType<typeof mapState> & ReturnType<typeof mapDispatch> & {}
 
 const enhance = compose<Props, Props>(
   withPage(async ({ store }) => {
-    store.dispatch(fetchUsers())
+    store.dispatch(usersActions.fetchUsers())
 
     await store.end()
   }),
-  connect<Props>((state: RootState) => ({
-    users: selectUserList(state),
-  }))
+  connect(mapState, mapDispatch)
 )
 
 function Users({ users }: Props) {

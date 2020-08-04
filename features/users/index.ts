@@ -1,6 +1,7 @@
-import * as exampleActions from './actions'
-import * as exampleSelectors from './selectors'
-import { usersReducer, User } from './reducer'
+import * as usersActions from './actions'
+import * as usersSelectors from './selectors'
+import { usersReducer } from './reducer'
+import { User, UsersState } from './types'
 
-export type { User }
-export { exampleActions, exampleSelectors, usersReducer }
+export type { User, UsersState }
+export { usersActions, usersSelectors, usersReducer }

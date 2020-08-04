@@ -2,17 +2,9 @@ import { ActionType } from 'typesafe-actions'
 import { HYDRATE } from 'next-redux-wrapper'
 
 import { withLoading } from 'features/loading'
+
 import * as actions from './actions'
-
-export interface User {
-  id: string
-  name: string
-  surname: string
-}
-
-interface UsersState {
-  users: Record<string, User>
-}
+import { UsersState } from './types'
 
 const initialState: UsersState = { users: {} }
 
