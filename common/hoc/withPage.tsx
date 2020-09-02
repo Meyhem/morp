@@ -12,11 +12,12 @@ export const withPage = (f?: (c: NextPageContext) => Promise<any>) => (
         ? await Component.getInitialProps(ctx)
         : {}
 
+      let addProps = {}
       if (f) {
-        await f(ctx)
+        addProps = await f(ctx) || addProps
       }
 
-      return { ...p, namespacesRequired: ['common'] }
+      return { ...p, ...addProps, namespacesRequired: ['common'] }
     }
 
     render() {

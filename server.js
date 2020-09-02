@@ -1,6 +1,6 @@
 const express = require('express')
 const next = require('next')
-const nextI18NextMiddleware = require('next-i18next/middleware').default
+// const nextI18NextMiddleware = require('next-i18next/middleware').default
 
 const nextI18next = require('./common/i18n')
 
@@ -11,9 +11,9 @@ const handle = app.getRequestHandler()
 ;(async () => {
   await app.prepare()
   const server = express()
-
+  server.disable('x-powered-by')
   await nextI18next.initPromise
-  server.use(nextI18NextMiddleware(nextI18next))
+  // server.use(nextI18NextMiddleware(nextI18next))
 
   server.all('*', (req, res) => handle(req, res))
 
