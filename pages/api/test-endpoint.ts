@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
+// Will return sample object afted 5s delay
 export default (req: NextApiRequest, res: NextApiResponse) => {
   return new Promise((r) =>
     setTimeout(() => {

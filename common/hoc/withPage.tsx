@@ -1,8 +1,6 @@
 import React from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 
-export interface WithPageProps {}
-
 export const withPage = (f?: (c: NextPageContext) => Promise<any>) => (
   Component: NextComponentType<NextPageContext>
 ) =>
@@ -14,7 +12,7 @@ export const withPage = (f?: (c: NextPageContext) => Promise<any>) => (
 
       let addProps = {}
       if (f) {
-        addProps = await f(ctx) || addProps
+        addProps = (await f(ctx)) || addProps
       }
 
       return { ...p, ...addProps, namespacesRequired: ['common'] }

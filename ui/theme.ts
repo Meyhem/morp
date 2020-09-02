@@ -1,6 +1,5 @@
-import { createGlobalStyle } from 'styled-components'
-
-import baseStyled, { ThemedStyledInterface } from 'styled-components'
+import baseStyled, { createGlobalStyle } from 'styled-components'
+import type { ThemedStyledInterface } from 'styled-components'
 
 export const theme = {
   colors: {
@@ -34,16 +33,16 @@ type CustomTheme = typeof theme
 export type Breakpoint = keyof typeof theme.breakpoints
 
 export function brk(min: Breakpoint) {
-  return (contentCss: any) => `
+  return (contentCss: string): string => `
     @media (min-width: ${theme.breakpoints[min]}px) { ${contentCss} }
   `
 }
 
 export function brkbt(min: Breakpoint | null, max: Breakpoint) {
-  return (contentCss: any) => `
-    @media (min-width: ${min ? theme.breakpoints[min] : 0}px) and (max-width: ${
-    theme.breakpoints[max]
-  }px) { ${contentCss} }
+  return (contentCss: string): string =>
+    `@media (min-width: ${
+      min ? theme.breakpoints[min] : 0
+    }px) and (max-width: ${theme.breakpoints[max]}px) { ${contentCss} }
   `
 }
 

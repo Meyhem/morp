@@ -1,3 +1,5 @@
+import React from 'react'
+
 import App, { AppContext } from 'next/app'
 import { compose } from 'recompose'
 import { ThemeProvider } from 'styled-components'

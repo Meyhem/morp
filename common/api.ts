@@ -4,7 +4,12 @@ import axios, {
   AxiosRequestConfig,
   CancelToken,
 } from 'axios'
-import { call, cancelled } from 'redux-saga/effects'
+import {
+  call,
+  cancelled,
+  CallEffect,
+  CancelledEffect,
+} from 'redux-saga/effects'
 import _ from 'lodash'
 
 type ApiRequestConfig =
@@ -27,7 +32,9 @@ function makeAxiosConfig(
  * @param options request options
  * @example yield call(apicall, ['http://localhost:3000/api/test-endpoint', { method: 'GET' }])
  */
-export function* apicall(options: ApiRequestConfig) {
+export function* apicall(
+  options: ApiRequestConfig
+): Generator<CallEffect<AxiosResponse<unknown>> | CancelledEffect> {
   const ct = axios.CancelToken.source()
   const axiosConfig = makeAxiosConfig(options, ct.token)
 
@@ -35,6 +42,7 @@ export function* apicall(options: ApiRequestConfig) {
     return yield call(api, axiosConfig)
   } finally {
     if (yield cancelled()) {
+      // eslint-disable-next-line no-console
       console.info(
         `Cancelling request: ${axiosConfig.method} ${axiosConfig.url}`
       )

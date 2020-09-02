@@ -9,7 +9,8 @@
   },
   "extends": [
     "eslint:recommended",
-    "eslint-plugin-import",
+    "plugin:import/warnings",
+    "plugin:import/errors",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
@@ -24,14 +25,22 @@
       "jsx": true
     }
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
+    "prettier/prettier": ["error"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/indent": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-console": "warn",
-    "camelcase": "error"
+    "camelcase": "error",
+    "import/no-unresolved": "off"
   }
 }

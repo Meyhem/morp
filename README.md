@@ -5,6 +5,13 @@ This project contains installed and set up:
 * i18n
 * styled-components
 * Dev stuff (eslint, prettier, TS)
+
+Install following VS Code plugins
+* Eslint
+* Editorconfig
+* Prettier
+* vscode-styled-components
+
 ## Running
 ```bash
 yarn run dev

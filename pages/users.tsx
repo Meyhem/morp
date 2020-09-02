@@ -1,7 +1,10 @@
+import React from 'react'
+
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 import _ from 'lodash'
+import { Dispatch } from 'redux'
 
 import { withPage } from 'common/hoc'
 
@@ -9,7 +12,6 @@ import { RootState } from 'features/types'
 import { usersActions, usersSelectors } from 'features/users'
 
 import { styled } from 'ui/theme'
-import { Dispatch } from 'redux'
 
 const UserList = styled.ul`
   font-size: 1.5em;

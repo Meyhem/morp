@@ -1,4 +1,6 @@
-function Error({ statusCode }) {
+import React from 'react'
+
+function Error({ statusCode }: { statusCode: number }) {
   return (
     <p>
       {statusCode
