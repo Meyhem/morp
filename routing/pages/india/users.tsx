@@ -24,7 +24,10 @@ const mapState = (state: RootState) => ({
 
 const mapDispatch = (d: Dispatch) => ({})
 
-type Props = ReturnType<typeof mapState> & ReturnType<typeof mapDispatch> & {}
+type Props = ReturnType<typeof mapState> &
+  ReturnType<typeof mapDispatch> & {
+    exampleFromRouteTable: string
+  }
 
 const enhance = compose<Props, Props>(
   withPage(async ({ store }) => {
@@ -35,13 +38,14 @@ const enhance = compose<Props, Props>(
   connect(mapState, mapDispatch)
 )
 
-function Users({ users }: Props) {
+function Users({ users, exampleFromRouteTable }: Props) {
   return (
     <div>
       <Link href="/">
         <a>Home</a>
       </Link>
       <h1>India users !</h1>
+      Custom prop: {exampleFromRouteTable}
       <UserList>
         {_.map(users, (u) => (
           <li key={u.id}>
